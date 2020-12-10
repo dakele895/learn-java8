@@ -55,27 +55,12 @@ public class FunctionalDemo {
             list.add(i);
         }
 
-        IntPredicate evenNumbers = (int i) -> i % 2 == 0;
-        evenNumbers.test(1000);
+        list.forEach(integer -> {
+            System.out.println(integer);
+        });
 
-        Predicate<Integer> oddNumbers = (Integer i) -> i % 2 == 1;
-        oddNumbers.test(1000);
 
-        Function<Integer, Integer> add1   = x -> x + 1;
-        Function<String, String>   concat = x -> x + 1;
 
-        Integer two    = add1.apply(1); //yields 2
-        String  answer = concat.apply("0 + 1 = "); // "0 + 1 = 1"
-
-        BinaryOperator<Integer> sum = (a, b) -> a + b;
-        Integer                 res = sum.apply(1, 2); // 3
-
-        BinaryOperator<Function<Integer, Integer>> compose = (f, g) -> x -> g.apply(f.apply(x));
-
-        UnaryOperator<Integer>                    add2    = n -> n + 1;
-        UnaryOperator<String>                     concat1 = s -> s + 1;
-        Function<Integer, UnaryOperator<Integer>> sum2    = x -> y -> x + y;
-        UnaryOperator<Integer>                    sum10   = sum2.apply(10);
 
     }
 }

@@ -1,8 +1,11 @@
 package io.github.biezhi.java8.concurrent;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 /**
@@ -22,7 +25,10 @@ public class Atomic1 {
     private static AtomicInteger atomicInt = new AtomicInteger(0);
 
     public static void main(String[] args) {
-        testIncrement();
+        List<String> stringList = letterList();
+        System.out.println(stringList.toString());
+
+        //testIncrement();
 //        testAccumulate();
 //        testUpdate();
     }
@@ -72,5 +78,19 @@ public class Atomic1 {
         ConcurrentUtils.stop(executor);
 
         System.out.format("Increment: Expected=%d; Is=%d\n", NUM_INCREMENTS, atomicInt.get());
+    }
+
+
+    private static List<String> letterList(){
+        List<Character> list = new ArrayList<>();
+        for (int i = 0; i < 26; i++) {
+            char c = (char) (65 + i);
+            list.add(c);
+        }
+        return   list.stream().map(str ->{
+            return  str.toString();
+        }).collect(Collectors.toList());
+
+
     }
 }
